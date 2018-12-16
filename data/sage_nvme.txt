@@ -1,0 +1,103 @@
+
+root@reesi001:~# smartctl -x --json /dev/nvme0n1
+{
+  "json_format_version": [
+    0,
+    1
+  ],
+  "smartctl": {
+    "version": [
+      6,
+      7
+    ],
+    "svn_revision": "4845",
+    "platform_info": "x86_64-linux-4.4.0-112-generic",
+    "build_info": "(CircleCI)",
+    "argv": [
+      "smartctl",
+      "-x",
+      "--json",
+      "/dev/nvme0n1"
+    ],
+    "exit_status": 0
+  },
+  "device": {
+    "name": "/dev/nvme0n1",
+    "info_name": "/dev/nvme0n1",
+    "type": "nvme",
+    "protocol": "NVMe"
+  },
+  "model_name": "MTFDHBG800MCG-1AN1ZABYY",
+  "serial_number": "ZF1000MT",
+  "firmware_version": "PA00MU02",
+  "nvme_pci_vendor": {
+    "id": 4932,
+    "subsystem_id": 4932
+  },
+  "nvme_ieee_oui_identifier": 41077,
+  "nvme_controller_id": 0,
+  "nvme_number_of_namespaces": 1,
+  "nvme_namespaces": [
+    {
+      "id": 1,
+      "size": {
+        "blocks": 1562824368,
+        "bytes": 800166076416
+      },
+      "capacity": {
+        "blocks": 1562824368,
+        "bytes": 800166076416
+      },
+      "utilization": {
+        "blocks": 1562824368,
+        "bytes": 800166076416
+      },
+      "formatted_lba_size": 512,
+      "eui64": {
+        "oui": 2439615,
+        "ext_id": 206166138880
+      }
+    }
+  ],
+  "user_capacity": {
+    "blocks": 1562824368,
+    "bytes": 800166076416
+  },
+  "logical_block_size": 512,
+  "local_time": {
+    "time_t": 1544494278,
+    "asctime": "Tue Dec 11 02:11:18 2018 UTC"
+  },
+  "smart_status": {
+    "passed": true,
+    "nvme": {
+      "value": 0
+    }
+  },
+  "nvme_smart_health_information_log": {
+    "critical_warning": 0,
+    "temperature": 53,
+    "available_spare": 100,
+    "available_spare_threshold": 20,
+    "percentage_used": 0,
+    "data_units_read": 64146927,
+    "data_units_written": 35503224,
+    "host_reads": 2712503081,
+    "host_writes": 2296668167,
+    "controller_busy_time": 10511,
+    "power_cycles": 8,
+    "power_on_hours": 7580,
+    "unsafe_shutdowns": 3,
+    "media_errors": 0,
+    "num_err_log_entries": 94,
+    "warning_temp_time": 0,
+    "critical_comp_time": 0
+  },
+  "temperature": {
+    "current": 53
+  },
+  "power_cycle_count": 8,
+  "power_on_time": {
+    "hours": 7580
+  }
+}
