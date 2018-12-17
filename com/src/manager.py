@@ -34,6 +34,7 @@ def get_smart_nvme():  # noqa: E501
 
     :rtype: None
     """
+    print("test")
     return 'do some magic!'
 
 

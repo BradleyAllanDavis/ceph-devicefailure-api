@@ -35,6 +35,7 @@ def add_smart_ssd(smartSsd):  # noqa: E501
     """
     if connexion.request.is_json:
         smartSsd = SmartSsd.from_dict(connexion.request.get_json())  # noqa: E501
+    manager.add_smart_ssd(smartSsd)
     return 'do some magic!'
 
 
@@ -46,7 +47,8 @@ def get_smart_nvme():  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+
+    return manager.get_smart_nvme()
 
 
 def get_smart_ssd():  # noqa: E501
@@ -57,4 +59,4 @@ def get_smart_ssd():  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return manager.get_smart_ssd()
