@@ -1,0 +1,1129 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample Petstore server.  You can find \nout more about Swagger at \n[http://swagger.io](http://swagger.io) or on \n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n",
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/cs-739/DiskFailurePrediction/1.0.0",
+  "tags": [
+    {
+      "name": "user",
+      "description": "Operations about user",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/smart-ssd": {
+      "get": {
+        "tags": [
+          "smart data"
+        ],
+        "summary": "Get all ssd disk data",
+        "operationId": "getSmartSsd",
+        "parameters": [],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "smart data"
+        ],
+        "summary": "Upload ssd disk data",
+        "operationId": "addSmartSsd",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "smartSsd",
+            "description": "Smartctl --json -x output to be added to dataset",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmartSsd"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/smart-nvme": {
+      "get": {
+        "tags": [
+          "smart data"
+        ],
+        "summary": "Get all NVME disk data",
+        "operationId": "getSmartNvme",
+        "parameters": [],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "smart data"
+        ],
+        "summary": "Upload NVME disk data",
+        "operationId": "addSmartNvme",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "smartNvme",
+            "description": "Smartctl --json -x output to be added to dataset",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmartNvme"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SmartNvme": {
+      "type": "object",
+      "properties": {
+        "json_format_version": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "smartctl": {
+          "$ref": "#/definitions/SmartNvme_smartctl"
+        },
+        "device": {
+          "$ref": "#/definitions/SmartNvme_device"
+        },
+        "model_name": {
+          "type": "string"
+        },
+        "serial_number": {
+          "type": "string"
+        },
+        "firmware_version": {
+          "type": "string"
+        },
+        "nvme_pci_vendor": {
+          "$ref": "#/definitions/SmartNvme_nvme_pci_vendor"
+        },
+        "nvme_ieee_oui_identifier": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nvme_controller_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nvme_number_of_namespaces": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nvme_namespaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmartNvme_nvme_namespaces"
+          }
+        },
+        "user_capacity": {
+          "$ref": "#/definitions/SmartNvme_size"
+        },
+        "logical_block_size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "local_time": {
+          "$ref": "#/definitions/SmartNvme_local_time"
+        },
+        "smart_status": {
+          "$ref": "#/definitions/SmartNvme_smart_status"
+        },
+        "nvme_smart_health_information_log": {
+          "$ref": "#/definitions/SmartNvme_nvme_smart_health_information_log"
+        },
+        "temperature": {
+          "$ref": "#/definitions/SmartNvme_temperature"
+        },
+        "power_cycle_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "power_on_time": {
+          "$ref": "#/definitions/SmartNvme_power_on_time"
+        }
+      }
+    },
+    "SmartSsd": {
+      "type": "object",
+      "properties": {
+        "json_format_version": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "smartctl": {
+          "$ref": "#/definitions/SmartNvme_smartctl"
+        },
+        "device": {
+          "$ref": "#/definitions/SmartNvme_device"
+        },
+        "model_family": {
+          "type": "string"
+        },
+        "model_name": {
+          "type": "string"
+        },
+        "serial_number": {
+          "type": "string"
+        },
+        "wwn": {
+          "$ref": "#/definitions/SmartSsd_wwn"
+        },
+        "firmware_version": {
+          "type": "string"
+        },
+        "user_capacity": {
+          "$ref": "#/definitions/SmartSsd_user_capacity"
+        },
+        "logical_block_size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "physical_block_size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rotation_rate": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "form_factor": {
+          "$ref": "#/definitions/SmartSsd_form_factor"
+        },
+        "in_smartctl_database": {
+          "type": "boolean"
+        },
+        "ata_version": {
+          "$ref": "#/definitions/SmartSsd_ata_version"
+        },
+        "sata_version": {
+          "$ref": "#/definitions/SmartSsd_sata_version"
+        },
+        "interface_speed": {
+          "$ref": "#/definitions/SmartSsd_interface_speed"
+        },
+        "local_time": {
+          "$ref": "#/definitions/SmartNvme_local_time"
+        },
+        "read_lookahead": {
+          "$ref": "#/definitions/SmartSsd_read_lookahead"
+        },
+        "write_cache": {
+          "$ref": "#/definitions/SmartSsd_read_lookahead"
+        },
+        "ata_security": {
+          "$ref": "#/definitions/SmartSsd_ata_security"
+        },
+        "smart_status": {
+          "$ref": "#/definitions/SmartSsd_smart_status"
+        },
+        "ata_smart_data": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_data"
+        },
+        "ata_sct_capabilities": {
+          "$ref": "#/definitions/SmartSsd_ata_sct_capabilities"
+        },
+        "ata_smart_attributes": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_attributes"
+        },
+        "temperature": {
+          "$ref": "#/definitions/SmartSsd_temperature"
+        },
+        "ata_log_directory": {
+          "$ref": "#/definitions/SmartSsd_ata_log_directory"
+        },
+        "ata_smart_error_log": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_error_log"
+        },
+        "ata_smart_self_test_log": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_error_log"
+        },
+        "ata_sct_status": {
+          "$ref": "#/definitions/SmartSsd_ata_sct_status"
+        },
+        "ata_sct_temperature_history": {
+          "$ref": "#/definitions/SmartSsd_ata_sct_temperature_history"
+        },
+        "ata_sct_erc": {
+          "$ref": "#/definitions/SmartSsd_ata_sct_erc"
+        },
+        "sata_phy_event_counters": {
+          "$ref": "#/definitions/SmartSsd_sata_phy_event_counters"
+        }
+      }
+    },
+    "SmartNvme_smartctl": {
+      "properties": {
+        "version": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "svn_revision": {
+          "type": "string"
+        },
+        "platform_info": {
+          "type": "string"
+        },
+        "build_info": {
+          "type": "string"
+        },
+        "argv": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exit_status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartNvme_device": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "info_name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        }
+      }
+    },
+    "SmartNvme_nvme_pci_vendor": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subsystem_id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartNvme_size": {
+      "properties": {
+        "blocks": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bytes": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SmartNvme_eui64": {
+      "properties": {
+        "oui": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ext_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SmartNvme_nvme_namespaces": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "$ref": "#/definitions/SmartNvme_size"
+        },
+        "capacity": {
+          "$ref": "#/definitions/SmartNvme_size"
+        },
+        "utilization": {
+          "$ref": "#/definitions/SmartNvme_size"
+        },
+        "formatted_lba_size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eui64": {
+          "$ref": "#/definitions/SmartNvme_eui64"
+        }
+      }
+    },
+    "SmartNvme_local_time": {
+      "properties": {
+        "time_t": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "asctime": {
+          "type": "string"
+        }
+      }
+    },
+    "SmartNvme_smart_status_nvme": {
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartNvme_smart_status": {
+      "properties": {
+        "passed": {
+          "type": "boolean"
+        },
+        "nvme": {
+          "$ref": "#/definitions/SmartNvme_smart_status_nvme"
+        }
+      }
+    },
+    "SmartNvme_nvme_smart_health_information_log": {
+      "properties": {
+        "critical_warning": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "temperature": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "available_spare": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "available_spare_threshold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "percentage_used": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "data_units_read": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "data_units_written": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "host_reads": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "host_writes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "controller_busy_time": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "power_cycles": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "power_on_hours": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unsafe_shutdowns": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "media_errors": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "num_err_log_entries": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "warning_temp_time": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "critical_comp_time": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartNvme_temperature": {
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartNvme_power_on_time": {
+      "properties": {
+        "hours": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_wwn": {
+      "properties": {
+        "naa": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "oui": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_user_capacity_blocks": {
+      "properties": {
+        "n": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "s": {
+          "type": "string"
+        }
+      }
+    },
+    "SmartSsd_user_capacity_bytes": {
+      "properties": {
+        "n": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "s": {
+          "type": "string"
+        }
+      }
+    },
+    "SmartSsd_user_capacity": {
+      "properties": {
+        "blocks": {
+          "$ref": "#/definitions/SmartSsd_user_capacity_blocks"
+        },
+        "bytes": {
+          "$ref": "#/definitions/SmartSsd_user_capacity_bytes"
+        }
+      }
+    },
+    "SmartSsd_form_factor": {
+      "properties": {
+        "ata_value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "SmartSsd_ata_version": {
+      "properties": {
+        "string": {
+          "type": "string"
+        },
+        "major_value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minor_value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_sata_version": {
+      "properties": {
+        "string": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_interface_speed_max": {
+      "properties": {
+        "string": {
+          "type": "string"
+        }
+      }
+    },
+    "SmartSsd_interface_speed": {
+      "properties": {
+        "max": {
+          "$ref": "#/definitions/SmartSsd_interface_speed_max"
+        },
+        "current": {
+          "$ref": "#/definitions/SmartSsd_interface_speed_max"
+        }
+      }
+    },
+    "SmartSsd_read_lookahead": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SmartSsd_ata_security": {
+      "properties": {
+        "state": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "string": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "frozen": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SmartSsd_smart_status": {
+      "properties": {
+        "passed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_data_offline_data_collection_status": {
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "string": {
+          "type": "string"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_data_offline_data_collection": {
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_data_offline_data_collection_status"
+        },
+        "completion_seconds": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_data_self_test_status": {
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "string": {
+          "type": "string"
+        },
+        "passed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_data_self_test_polling_minutes": {
+      "properties": {
+        "short": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "extended": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conveyance": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_data_self_test": {
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_data_self_test_status"
+        },
+        "polling_minutes": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_data_self_test_polling_minutes"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_data_capabilities": {
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "exec_offline_immediate_supported": {
+          "type": "boolean"
+        },
+        "offline_is_aborted_upon_new_cmd": {
+          "type": "boolean"
+        },
+        "offline_surface_scan_supported": {
+          "type": "boolean"
+        },
+        "self_tests_supported": {
+          "type": "boolean"
+        },
+        "conveyance_self_test_supported": {
+          "type": "boolean"
+        },
+        "selective_self_test_supported": {
+          "type": "boolean"
+        },
+        "attribute_autosave_enabled": {
+          "type": "boolean"
+        },
+        "error_logging_supported": {
+          "type": "boolean"
+        },
+        "gp_logging_supported": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_data": {
+      "properties": {
+        "offline_data_collection": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_data_offline_data_collection"
+        },
+        "self_test": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_data_self_test"
+        },
+        "capabilities": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_data_capabilities"
+        }
+      }
+    },
+    "SmartSsd_ata_sct_capabilities": {
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error_recovery_control_supported": {
+          "type": "boolean"
+        },
+        "feature_control_supported": {
+          "type": "boolean"
+        },
+        "data_table_supported": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_attributes_flags": {
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "string": {
+          "type": "string"
+        },
+        "prefailure": {
+          "type": "boolean"
+        },
+        "updated_online": {
+          "type": "boolean"
+        },
+        "performance": {
+          "type": "boolean"
+        },
+        "error_rate": {
+          "type": "boolean"
+        },
+        "event_count": {
+          "type": "boolean"
+        },
+        "auto_keep": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_attributes_table": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "worst": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "thresh": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "when_failed": {
+          "type": "string"
+        },
+        "flags": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_attributes_flags"
+        },
+        "raw": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_data_offline_data_collection_status"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_attributes": {
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "table": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmartSsd_ata_smart_attributes_table"
+          }
+        }
+      }
+    },
+    "SmartSsd_temperature": {
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "power_cycle_min": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "power_cycle_max": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lifetime_min": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lifetime_max": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "op_limit_min": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "op_limit_max": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit_min": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit_max": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_ata_log_directory_table": {
+      "properties": {
+        "address": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "read": {
+          "type": "boolean"
+        },
+        "write": {
+          "type": "boolean"
+        },
+        "gp_sectors": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "smart_sectors": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_ata_log_directory": {
+      "properties": {
+        "gp_dir_version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "smart_dir_version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "smart_dir_multi_sector": {
+          "type": "boolean"
+        },
+        "table": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmartSsd_ata_log_directory_table"
+          }
+        }
+      }
+    },
+    "SmartSsd_ata_smart_error_log_extended": {
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sectors": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_ata_smart_error_log": {
+      "properties": {
+        "extended": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_error_log_extended"
+        }
+      }
+    },
+    "SmartSsd_ata_sct_status_temperature": {
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "power_cycle_min": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "power_cycle_max": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lifetime_min": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lifetime_max": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "under_limit_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "over_limit_count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_ata_sct_status": {
+      "properties": {
+        "format_version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sct_version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "device_state": {
+          "$ref": "#/definitions/SmartSsd_ata_smart_data_offline_data_collection_status"
+        },
+        "temperature": {
+          "$ref": "#/definitions/SmartSsd_ata_sct_status_temperature"
+        },
+        "vendor_specific": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "SmartSsd_ata_sct_temperature_history_temperature": {
+      "properties": {
+        "op_limit_min": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "op_limit_max": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit_min": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit_max": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SmartSsd_ata_sct_temperature_history": {
+      "properties": {
+        "version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sampling_period_minutes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "logging_interval_minutes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "temperature": {
+          "$ref": "#/definitions/SmartSsd_ata_sct_temperature_history_temperature"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "table": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "SmartSsd_ata_sct_erc": {
+      "properties": {
+        "read": {
+          "$ref": "#/definitions/SmartSsd_read_lookahead"
+        },
+        "write": {
+          "$ref": "#/definitions/SmartSsd_read_lookahead"
+        }
+      }
+    },
+    "SmartSsd_sata_phy_event_counters_table": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "overflow": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SmartSsd_sata_phy_event_counters": {
+      "properties": {
+        "table": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmartSsd_sata_phy_event_counters_table"
+          }
+        },
+        "reset": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
