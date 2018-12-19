@@ -15,19 +15,22 @@
   },
   "host": "localhost:8080",
   "basePath": "/cs-739/DiskFailurePrediction/1.0.0",
-  "tags": [
-    {
-      "name": "user",
-      "description": "Operations about user",
-      "externalDocs": {
-        "description": "Find out more about our store",
-        "url": "http://swagger.io"
-      }
-    }
-  ],
   "schemes": [
     "https",
     "http"
+  ],
+  "securityDefinitions": {
+    "api_key": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "security": [
+    {
+      "api_key": [
+      ]
+    }
   ],
   "paths": {
     "/smart-ssd": {
@@ -54,6 +57,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "description": "Unique User ID",
+            "in": "query",
+            "name": "UUID",
+            "type": "string"
+          },
           {
             "in": "body",
             "name": "smartSsd",
@@ -96,6 +105,12 @@
         ],
         "parameters": [
           {
+            "description": "Unique User ID",
+            "in": "query",
+            "name": "UUID",
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "smartNvme",
             "description": "Smartctl --json -x output to be added to dataset",
@@ -106,6 +121,44 @@
           }
         ],
         "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/get_auth": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Get all NVME disk data",
+        "operationId": "getSmartNvme",
+        "parameters": [
+          {
+            "description": "Unique User ID",
+            "in": "query",
+            "name": "UUID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UUID": {
+                  "type": "string",
+                  "description": "Unique User ID"
+                },
+                "ApiKey": {
+                  "type": "string",
+                  "description": "API Key"
+                }
+              }
+            }
+          },
           "405": {
             "description": "Invalid input"
           }

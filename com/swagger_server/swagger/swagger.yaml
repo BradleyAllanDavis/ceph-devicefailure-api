@@ -13,15 +13,11 @@ info:
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "localhost:8080"
 basePath: "/cs-739/DiskFailurePrediction/1.0.0"
-tags:
-- name: "user"
-  description: "Operations about user"
-  externalDocs:
-    description: "Find out more about our store"
-    url: "http://swagger.io"
 schemes:
 - "https"
 - "http"
+security:
+- api_key: []
 paths:
   /smart-ssd:
     get:
@@ -42,6 +38,11 @@ paths:
       consumes:
       - "application/json"
       parameters:
+      - name: "UUID"
+        in: "query"
+        description: "Unique User ID"
+        required: false
+        type: "string"
       - in: "body"
         name: "smartSsd"
         description: "Smartctl --json -x output to be added to dataset"
@@ -71,6 +72,11 @@ paths:
       consumes:
       - "application/json"
       parameters:
+      - name: "UUID"
+        in: "query"
+        description: "Unique User ID"
+        required: false
+        type: "string"
       - in: "body"
         name: "smartNvme"
         description: "Smartctl --json -x output to be added to dataset"
@@ -81,6 +87,31 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "swagger_server.controllers.smart_data_controller"
+  /get_auth:
+    get:
+      tags:
+      - "Auth"
+      summary: "Get all NVME disk data"
+      operationId: "get_smart_nvme"
+      parameters:
+      - name: "UUID"
+        in: "query"
+        description: "Unique User ID"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "swagger_server.controllers.auth_controller"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
 definitions:
   SmartNvme:
     type: "object"
@@ -1440,3 +1471,14 @@ definitions:
         name: "name"
         id: 2
         value: 8
+  inline_response_200:
+    properties:
+      UUID:
+        type: "string"
+        description: "Unique User ID"
+      ApiKey:
+        type: "string"
+        description: "API Key"
+    example:
+      ApiKey: "ApiKey"
+      UUID: "UUID"

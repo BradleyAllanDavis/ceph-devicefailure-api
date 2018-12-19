@@ -3,6 +3,7 @@
 # flake8: noqa
 from __future__ import absolute_import
 # import models into model package
+from swagger_server.models.inline_response200 import InlineResponse200
 from swagger_server.models.smart_nvme import SmartNvme
 from swagger_server.models.smart_nvme_device import SmartNvmeDevice
 from swagger_server.models.smart_nvme_eui64 import SmartNvmeEui64
