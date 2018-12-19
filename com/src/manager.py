@@ -1,4 +1,7 @@
+import json
 import pymongo
+from bson import json_util
+from bson import ObjectId
 from flask import Flask
 
 
@@ -9,6 +12,13 @@ client = pymongo.MongoClient("localhost", 27017)
 db = client["db"]
 smartnvme_collection = db["smart_nvme"]
 smartssd_collection = db["smart_ssd"]
+
+
+# class JSONEncoder(json.JSONEncoder):
+#     def default(self, o):
+#         if isinstance(o, ObjectId):
+#             return str(o)
+#         return json.JSONEncoder.default(self, o)
 
 
 def add_smart_nvme(smartNvme):  # noqa: E501
@@ -25,7 +35,6 @@ def add_smart_nvme(smartNvme):  # noqa: E501
     dct = smartNvme.to_dict()
     smartnvme_id = smartnvme_collection.insert_one(dct).inserted_id
     app.logger.info('smartnvme_id = ' + str(smartnvme_id))
-    # return 'success?'
 
 
 def add_smart_ssd(smartSsd):  # noqa: E501
@@ -42,7 +51,6 @@ def add_smart_ssd(smartSsd):  # noqa: E501
     dct = smartSsd.to_dict()
     smartssd_id = smartssd_collection.insert_one(dct).inserted_id
     app.logger.info('smartssd_id = ' + str(smartssd_id))
-    # return 'success?'
 
 
 def get_smart_nvme():  # noqa: E501
@@ -54,7 +62,8 @@ def get_smart_nvme():  # noqa: E501
     :rtype: None
     """
     app.logger.info('manager.get_smart_nvme()')
-    # return 'success?'
+    docs = list(smartnvme_collection.find())
+    return json.dumps(docs, default=json_util.default)
 
 
 def get_smart_ssd():  # noqa: E501
@@ -66,4 +75,5 @@ def get_smart_ssd():  # noqa: E501
     :rtype: None
     """
     app.logger.info('manager.get_smart_ssd()')
-    # return 'success?'
+    docs = list(smartssd_collection.find())
+    return json.dumps(docs, default=json_util.default)
