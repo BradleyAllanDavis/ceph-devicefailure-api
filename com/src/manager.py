@@ -1,10 +1,14 @@
+import json
 import pymongo
+from bson import json_util
+from bson import ObjectId
 from flask import Flask
 import uuid
 import hashlib
 from swagger_server.models.inline_response200 import InlineResponse200
 import connexion
 from swagger_server.models.smart_nvme import SmartNvme
+from swagger_server.models.smart_ssd import SmartSsd
 
 app = Flask(__name__)
 
@@ -54,10 +58,11 @@ def add_smart_ssd(smartSsd, UUID):  # noqa: E501
     app.logger.info('manager.add_smart_ssd()')
 
     if connexion.request.is_json:
-        smartSsd = SmartNvme.from_dict(connexion.request.get_json())  # noqa: E501
+        smartSsd = SmartSsd.from_dict(connexion.request.get_json())  # noqa: E501
 
     if (check_auth(UUID) is False):
         return "Authorization Failed"
+
     dct = smartSsd.to_dict()
     dct["UUID"] = UUID
     smartssd_id = smartssd_collection.insert_one(dct).inserted_id
@@ -74,8 +79,11 @@ def get_smart_nvme():  # noqa: E501
     :rtype: None
     """
     app.logger.info('manager.get_smart_nvme()')
-    check_auth()
-    # return 'success?'
+    ret_list = []
+    docs = list(smartnvme_collection.find())
+    for doc in docs:
+        ret_list.append(SmartNvme.from_dict(doc))
+    return ret_list
 
 
 def get_smart_ssd():  # noqa: E501
@@ -87,8 +95,11 @@ def get_smart_ssd():  # noqa: E501
     :rtype: None
     """
     app.logger.info('manager.get_smart_ssd()')
-    check_auth()
-    # return 'success?'
+    ret_list = []
+    docs = list(smartssd_collection.find())
+    for doc in docs:
+        ret_list.append(SmartSsd.from_dict(doc))
+    return ret_list
 
 
 def get_auth(UUID=None):

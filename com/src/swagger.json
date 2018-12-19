@@ -1,9 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a sample Petstore server.  You can find \nout more about Swagger at \n[http://swagger.io](http://swagger.io) or on \n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n",
     "version": "1.0.0",
-    "title": "Swagger Petstore",
+    "title": "Ceph SMART Metrics",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "apiteam@swagger.io"
@@ -42,6 +41,15 @@
         "operationId": "getSmartSsd",
         "parameters": [],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SmartSsd"
+              }
+            }
+          },
           "405": {
             "description": "Invalid input"
           }
@@ -121,6 +129,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SmartNvme"
+              }
+            }
+          },
           "405": {
             "description": "Invalid input"
           }

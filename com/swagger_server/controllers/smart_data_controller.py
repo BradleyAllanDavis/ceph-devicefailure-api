@@ -6,7 +6,7 @@ from swagger_server.models.smart_ssd import SmartSsd  # noqa: E501
 from swagger_server import util
 from src import manager
 
-def add_smart_nvme(smartNvme, UUID):  # noqa: E501
+def add_smart_nvme(smartNvme, UUID=None):  # noqa: E501
     """Upload NVME disk data
 
      # noqa: E501
@@ -16,9 +16,8 @@ def add_smart_nvme(smartNvme, UUID):  # noqa: E501
     :param UUID: Unique User ID
     :type UUID: str
 
-    :rtype: None
+    :rtype: List[SmartNvme]
     """
-
     return manager.add_smart_nvme(smartNvme, UUID)
 
 
@@ -34,9 +33,7 @@ def add_smart_ssd(smartSsd, UUID=None):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        smartSsd = SmartSsd.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return manager.add_smart_ssd(smartSsd, UUID)
 
 
 def get_smart_nvme():  # noqa: E501
@@ -47,7 +44,7 @@ def get_smart_nvme():  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return manager.get_smart_nvme()
 
 
 def get_smart_ssd():  # noqa: E501
@@ -56,6 +53,6 @@ def get_smart_ssd():  # noqa: E501
      # noqa: E501
 
 
-    :rtype: None
+    :rtype: List[SmartSsd]
     """
-    return 'do some magic!'
+    return manager.get_smart_ssd()
