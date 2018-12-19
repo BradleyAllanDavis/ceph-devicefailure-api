@@ -2,6 +2,8 @@ import pymongo
 from flask import Flask
 
 
+app = Flask(__name__)
+
 # open up database connection
 client = pymongo.MongoClient("localhost", 27017)
 db = client["db"]
@@ -19,10 +21,10 @@ def add_smart_nvme(smartNvme):  # noqa: E501
 
     :rtype: None
     """
-    print('add_smart_nvme()')
+    app.logger.info('manager.add_smart_nvme()')
     dct = smartNvme.to_dict()
     smartnvme_id = smartnvme_collection.insert_one(dct).inserted_id
-    print('smartnvme_id = ' + str(smartnvme_id))
+    app.logger.info('smartnvme_id = ' + str(smartnvme_id))
     # return 'success?'
 
 
@@ -36,10 +38,10 @@ def add_smart_ssd(smartSsd):  # noqa: E501
 
     :rtype: None
     """
-    print('add_smart_ssd()')
+    app.logger.info('manager.add_smart_ssd()')
     dct = smartSsd.to_dict()
     smartssd_id = smartssd_collection.insert_one(dct).inserted_id
-    print('smartssd_id = ' + str(smartssd_id))
+    app.logger.info('smartssd_id = ' + str(smartssd_id))
     # return 'success?'
 
 
@@ -51,7 +53,7 @@ def get_smart_nvme():  # noqa: E501
 
     :rtype: None
     """
-    print('get_smart_nvme()')
+    app.logger.info('manager.get_smart_nvme()')
     # return 'success?'
 
 
@@ -63,5 +65,5 @@ def get_smart_ssd():  # noqa: E501
 
     :rtype: None
     """
-    print('get_smart_ssd()')
+    app.logger.info('manager.get_smart_ssd()')
     # return 'success?'
