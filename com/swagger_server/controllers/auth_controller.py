@@ -3,10 +3,11 @@ import six
 
 from swagger_server.models.inline_response200 import InlineResponse200  # noqa: E501
 from swagger_server import util
+from src import manager
 
 
-def get_smart_nvme(UUID=None):  # noqa: E501
-    """Get all NVME disk data
+def get_auth(UUID=None):  # noqa: E501
+    """Generate new UUID and API Key
 
      # noqa: E501
 
@@ -15,4 +16,4 @@ def get_smart_nvme(UUID=None):  # noqa: E501
 
     :rtype: InlineResponse200
     """
-    return 'do some magic!'
+    return manager.get_auth(UUID)

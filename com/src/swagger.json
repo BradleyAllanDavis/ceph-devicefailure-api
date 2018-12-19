@@ -127,13 +127,13 @@
         }
       }
     },
-    "/get_auth": {
-      "get": {
+    "/auth": {
+      "post": {
         "tags": [
           "Auth"
         ],
-        "summary": "Get all NVME disk data",
-        "operationId": "getSmartNvme",
+        "summary": "Generate new UUID and API Key",
+        "operationId": "getAuth",
         "parameters": [
           {
             "description": "Unique User ID",

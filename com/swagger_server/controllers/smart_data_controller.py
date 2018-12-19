@@ -4,9 +4,9 @@ import six
 from swagger_server.models.smart_nvme import SmartNvme  # noqa: E501
 from swagger_server.models.smart_ssd import SmartSsd  # noqa: E501
 from swagger_server import util
+from src import manager
 
-
-def add_smart_nvme(smartNvme, UUID=None):  # noqa: E501
+def add_smart_nvme(smartNvme, UUID):  # noqa: E501
     """Upload NVME disk data
 
      # noqa: E501
@@ -18,9 +18,8 @@ def add_smart_nvme(smartNvme, UUID=None):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        smartNvme = SmartNvme.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+
+    return manager.add_smart_nvme(smartNvme, UUID)
 
 
 def add_smart_ssd(smartSsd, UUID=None):  # noqa: E501

@@ -87,12 +87,12 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "swagger_server.controllers.smart_data_controller"
-  /get_auth:
-    get:
+  /auth:
+    post:
       tags:
       - "Auth"
-      summary: "Get all NVME disk data"
-      operationId: "get_smart_nvme"
+      summary: "Generate new UUID and API Key"
+      operationId: "get_auth"
       parameters:
       - name: "UUID"
         in: "query"
